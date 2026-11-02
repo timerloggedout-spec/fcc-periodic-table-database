@@ -30,7 +30,9 @@ INSERT INTO public.elements VALUES
     (5, 'B', 'Boron'),
     (6, 'C', 'Carbon'),
     (7, 'N', 'Nitrogen'),
-    (8, 'O', 'Oxygen');
+    (8, 'O', 'Oxygen'),
+    (9, 'F', 'Fluorine'),
+    (10, 'Ne', 'Neon');
 
 CREATE TABLE public.properties (
     atomic_number integer PRIMARY KEY REFERENCES public.elements(atomic_number),
@@ -48,4 +50,6 @@ INSERT INTO public.properties VALUES
     (5, 10.81, 2075, 4000, 3),
     (6, 12.011, 3550, 4027, 1),
     (7, 14.007, -210.1, -195.8, 1),
-    (8, 15.999, -218, -183, 1);
+    (8, 15.999, -218, -183, 1),
+    (9, 18.998, -220, -188.1, 1),
+    (10, 20.18, -248.6, -246.1, 1);
