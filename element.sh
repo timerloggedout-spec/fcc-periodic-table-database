@@ -8,7 +8,14 @@ then
   exit 0
 fi
 
-ROW=$($PSQL "SELECT e.atomic_number, e.symbol, e.name, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e INNER JOIN properties p ON p.atomic_number = e.atomic_number INNER JOIN types t ON t.type_id = p.type_id WHERE e.atomic_number = $1")
+if [[ $1 =~ ^[0-9]+$ ]]
+then
+  CONDITION="e.atomic_number = $1"
+else
+  CONDITION="e.symbol = '$1' OR e.name = '$1'"
+fi
+
+ROW=$($PSQL "SELECT e.atomic_number, e.symbol, e.name, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e INNER JOIN properties p ON p.atomic_number = e.atomic_number INNER JOIN types t ON t.type_id = p.type_id WHERE $CONDITION")
 
 if [[ -z $ROW ]]
 then
